@@ -1,4 +1,3 @@
-
 import { pool } from '../config/db.js';
 import bcrypt from 'bcrypt';
 
@@ -40,7 +39,7 @@ export const register = async (req, res) => {
     console.log('- correo:', correo);
 
     const [result] = await pool.query(
-      'INSERT INTO usuarios (nombres, apellidos, correo, contraseña) VALUES (?, ?, ?, ?)',
+      'INSERT INTO usuarios (nombres, apellidos, correo, contrasena) VALUES (?, ?, ?, ?)',
       [nombres.trim(), finalApellidos, correo, hash]
     );
 
@@ -68,7 +67,7 @@ export const login = async (req, res) => {
     }
 
     const [rows] = await pool.query(
-      'SELECT id_usuario, nombres, apellidos, correo, contraseña FROM usuarios WHERE correo = ?',
+      'SELECT id_usuario, nombres, apellidos, correo, contrasena FROM usuarios WHERE correo = ?',
       [correo]
     );
 
@@ -77,7 +76,7 @@ export const login = async (req, res) => {
     }
 
     const user = rows[0];
-    const valid = await bcrypt.compare(password, user['contraseña']);
+    const valid = await bcrypt.compare(password, user.contrasena);
 
     if (!valid) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });

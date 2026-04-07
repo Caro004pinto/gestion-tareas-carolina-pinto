@@ -1,13 +1,9 @@
-
-CREATE DATABASE gestion_tareas_academicas;
-USE gestion_tareas_academicas;
-
 CREATE TABLE usuarios (
   id_usuario INT AUTO_INCREMENT PRIMARY KEY,
   nombres VARCHAR(50) NOT NULL,
   apellidos VARCHAR(50),
   correo VARCHAR(100) UNIQUE NOT NULL,
-  contraseña VARCHAR(255) NOT NULL,
+  contrasena VARCHAR(255) NOT NULL,
   fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
